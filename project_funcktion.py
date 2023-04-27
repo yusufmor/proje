@@ -17,3 +17,32 @@ def yönetici_parolası_ekle():
         else:
              break
     return yönetici_parolası #Yönetici parolasını döndürür
+def isim_ekle_kontrol():
+    #İsim ve parolayı kontrol edip onu döndürür
+    while True:
+        ad=input("Yeni kullanıcı adinizi giriniz..:")
+        parola=input("Yeni kullanıcı parolasını giriniz..:")
+        imlec.execute("SELECT * FROM kullanıcılar")
+        db=imlec.fetchall()
+        DB=[]
+        for i in db:
+            for a in i:
+                DB.append(a) 
+        if ad in DB:         #Ad içindemi diye kontrol edyor
+            imlec.execute("SELECT kullanıcı_parolası FROM kullanıcılar WHERE kullanıcı_adı = ?",[ad])
+            parola_db=imlec.fetchall()
+            parola_DB=[]
+            for i in parola_db:
+                for a in i:
+                    parola_DB.append(a)
+            
+            if parola != parola_DB[0]: #Ad içindeyse kullanıcıdan alına parola ile Bu ad veya adların içinde aynı parola var mı diye bakıyor
+                print("hesabınız eklendi") #yoksa dögüyü bitiriyor
+                break
+            else:
+                print("Böyle bir parola var")#varsa en başa dönüyor
+                continue
+        else:                #Ad içinde değilse döngüyü bitiriyor
+            break
+    return ad,parola #ensonda ad ve soyadı dödürüyor
+  
