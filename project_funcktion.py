@@ -45,4 +45,11 @@ def isim_ekle_kontrol():
         else:                #Ad içinde değilse döngüyü bitiriyor
             break
     return ad,parola #ensonda ad ve soyadı dödürüyor
-  
+def kayıt_ekle():
+    #Bu fonksiyon adı parolayı ve yönetici parolasını veri tabınına ekler
+    ad,parola = isim_ekle_kontrol()
+    girilecek_deger="INSERT INTO kullanıcılar(kullanıcı_adı,kullanıcı_parolası,yönetici_parolası) VALUES (?,?,?)"
+    yönetici_parolası=yönetici_parolası_ekle()
+    data=[ad,parola,yönetici_parolası]
+    imlec.execute(girilecek_deger,data)
+    vt.commit()
