@@ -1,5 +1,6 @@
 import projea as p
 import sqlite3 as sql
+import random as r
 vt=sql.connect("proje.db")
 imlec=vt.cursor()
 
@@ -52,4 +53,9 @@ def kayıt_ekle():
     yönetici_parolası=yönetici_parolası_ekle()
     data=[ad,parola,yönetici_parolası]
     imlec.execute(girilecek_deger,data)
+    vt.commit()
+
+def isim_sil(id):
+    #İd'si girilrn kullanıcınıyı siler
+    imlec.execute(f"DELETE FROM kullanıcılar WHERE id = {id} ")
     vt.commit()
